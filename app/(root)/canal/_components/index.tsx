@@ -22,7 +22,6 @@ async function getData(): Promise<LiveData[]> {
 const Canal = async () => {
   const tabsValue = cookies().get("tabs-choice:value");
   const defaulTabsValue = tabsValue ? JSON.parse(tabsValue.value) : undefined;
-  console.log(defaulTabsValue);
 
   const data = await getData();
   const user = await currentUser();
