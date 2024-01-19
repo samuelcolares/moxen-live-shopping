@@ -5,12 +5,14 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { neobrutalism } from "@clerk/themes";
 import { ptBR } from "@clerk/localizations";
 import { ThemeProvider } from "@/providers";
+import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Moxen Live Shopping",
-  description: "A plataforma web para divulgar Lives aonde produtos serão leiloados.",
+  description:
+    "A plataforma web para divulgar Lives aonde produtos serão leiloados.",
 };
 
 export default function RootLayout({
@@ -21,7 +23,12 @@ export default function RootLayout({
   return (
     <ClerkProvider appearance={{ baseTheme: neobrutalism }} localization={ptBR}>
       <html lang="en" suppressHydrationWarning>
-        <body className={inter.className}>
+        <body
+          className={cn(
+            "lg:min-h-screen min-h-dvh flex flex-col",
+            inter.className
+          )}
+        >
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

@@ -7,7 +7,7 @@ import Link from "next/link";
 const Navbar = () => {
   return (
     <header>
-      <nav className="flex justify-between p-4 bg-gray-800 shadow-md shadow-black/50 relative z-20">
+      <nav className="flex justify-between px-4 bg-gray-800 shadow-md shadow-black/50 fixed w-full z-20">
         <Link href={"/"}>
           <h1 aria-labelledby="title">
             <span className="sr-only" id="title">

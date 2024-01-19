@@ -55,6 +55,40 @@ body,
   }
 }
 
+html.dark body::-webkit-scrollbar {
+  background: rgba(255, 255, 255, 0.2);
+  width: 0.5em;
+}
+
+html.dark body::-webkit-scrollbar-thumb {
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.2);
+  transition: background 0.4s;
+}
+
+html.dark body::-webkit-scrollbar-thumb:hover {
+  border-radius: 0.8rem;
+  background-color: rgba(255, 255, 255, 0.8);
+
+}
+
+html.light body::-webkit-scrollbar {
+  background: rgba(0, 0, 0, 0.2);
+  width: 0.5em;
+}
+
+html.light body::-webkit-scrollbar-thumb {
+  border-radius: 0.8rem;
+  background: rgba(0, 0, 0, 0.2);
+  transition: background 0.4s;
+}
+
+html.light body::-webkit-scrollbar-thumb:hover {
+  border-radius: 0.8rem;
+  background-color: rgba(0, 0, 0, 0.8);
+
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

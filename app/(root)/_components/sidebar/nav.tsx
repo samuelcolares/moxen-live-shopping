@@ -2,23 +2,20 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LucideIcon } from "lucide-react";
+import { ArrowLeftFromLine, LucideIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { LinkProp } from "@/routes";
 
 interface NavProps {
   isCollapsed: boolean;
-  links: {
-    title: string;
-    icon: LucideIcon;
-    href: string;
-  }[];
+  links: LinkProp[];
 }
 
 export function Sidebar({ links, isCollapsed }: NavProps) {
@@ -27,7 +24,7 @@ export function Sidebar({ links, isCollapsed }: NavProps) {
   return (
     <aside
       data-collapsed={isCollapsed}
-      className="group flex flex-col gap-4 py-2 data-[collapsed=true]:py-2 "
+      className="group py-2 data-[collapsed=true]:py-2 fixed z-50 flex flex-col"
     >
       <nav className="grid gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
         {links.map((link, index) =>
@@ -75,8 +72,7 @@ const CollapsedLinks: React.FC<LinksProps> = ({
           className={cn(
             buttonVariants({ variant: "ghost", size: "icon" }),
             "h-9 w-9 hover:bg-gray-600",
-            href === pathname &&
-              "dark:bg-gray-500 dark:text-white dark:hover:text-white"
+            href === pathname && "bg-gray-500 text-white hover:text-white"
           )}
         >
           <Icon className="h-5 w-5" />
@@ -100,9 +96,8 @@ const ExtendedLinks: React.FC<LinksProps> = ({
     href={href}
     className={cn(
       buttonVariants({ variant: "ghost", size: "sm" }),
-      href === pathname &&
-        "dark:bg-gray-500 dark:text-white dark:hover:text-white",
-      "justify-start hover:bg-gray-600"
+      href === pathname && "bg-gray-500 text-white hover:text-white",
+      "justify-start hover:bg-gray-600 text-white"
     )}
   >
     <Icon className="mr-2 h-5 w-5" />

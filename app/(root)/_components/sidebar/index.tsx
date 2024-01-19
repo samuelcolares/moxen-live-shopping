@@ -9,9 +9,10 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { Sidebar } from "./nav";
-import { CalendarCheck, Home, Package, Radio } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { asideNavbarLinks } from "@/routes";
+import { Button } from "@/components/ui/button";
+import { ArrowLeftFromLine } from "lucide-react";
 
 type WrapperProps = {
   children: React.ReactNode;
@@ -27,14 +28,11 @@ const SidebarWrapper: React.FC<WrapperProps> = ({
   defaultLayout = [10, 90],
 }) => {
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed);
-  React.useEffect(() => {
-    console.log(isCollapsed);
-  }, [isCollapsed]);
   return (
     <TooltipProvider delayDuration={0}>
       <ResizablePanelGroup
         direction="horizontal"
-        className="w-full flex-1 "
+        className="w-full flex-1"
         onLayout={(sizes: number[]) => {
           document.cookie = `react-resizable-panels:layout=${JSON.stringify(
             sizes
@@ -43,8 +41,8 @@ const SidebarWrapper: React.FC<WrapperProps> = ({
       >
         <ResizablePanel
           defaultSize={defaultLayout[0]}
-          maxSize={15}
-          minSize={12}
+
+          minSize={navCollapsedSize+1}
           collapsible={true}
           collapsedSize={navCollapsedSize}
           onCollapse={() => {
@@ -60,41 +58,14 @@ const SidebarWrapper: React.FC<WrapperProps> = ({
             )}`;
           }}
           className={cn(
-            "bg-[#1f2937] transition-all duration-100",
-            isCollapsed && "min-w-[50px] duration-300 ease-in-out"
+            "transition-all duration-100 bg-[#1f2937] shadow-md shadow-black/70 min-w-[170px] max-w-[180px]",
+            isCollapsed && "min-w-[50px] max-w-[50px] duration-300 ease-in-out"
           )}
         >
           <Sidebar
             isCollapsed={isCollapsed}
-            links={[
-              {
-                title: "Home",
-                icon: Home,
-                href: "/",
-              },
-              {
-                title: "Suas lives",
-                icon: Radio,
-                href: "/lives",
-              },
-              {
-                title: "Agendar live",
-                icon: CalendarCheck,
-                href: "/lives/novaLive",
-              },
-              {
-                title: "Seus produtos",
-                icon: Package,
-                href: "/produtos",
-              },
-              {
-                title: "Cadastrar produto",
-                icon: CalendarCheck,
-                href: "/produtos/novoProduto",
-              },
-            ]}
+            links={asideNavbarLinks}
           />
-          <Separator />
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={defaultLayout[1]}>
