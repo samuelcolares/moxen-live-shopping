@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { ourFileRouter } from "./api/uploadthing/core";
 import { extractRouterConfig } from "uploadthing/server";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -47,6 +48,7 @@ export default function RootLayout({
                */
               routerConfig={extractRouterConfig(ourFileRouter)}
             />
+            <Toaster />
             {children}
           </ThemeProvider>
         </body>

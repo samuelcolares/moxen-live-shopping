@@ -1,11 +1,19 @@
-import React from 'react'
+import React from "react";
+import { ProductForm } from "./_components/product-form";
+import { getUniqueProduct } from "@/lib/product-service";
 
-const FormProdutoPage = () => {
+const FormProdutoPage = async ({
+  params,
+}: {
+  params: { produtoId: string };
+}) => {
+  const product = await getUniqueProduct(params.produtoId);
+
   return (
-    <div>
-asd
+    <div className="space-y-4 p-8 ">
+      <ProductForm initialData={product} />
     </div>
-  )
-}
+  );
+};
 
-export default FormProdutoPage
+export default FormProdutoPage;

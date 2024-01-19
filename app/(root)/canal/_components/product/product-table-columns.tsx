@@ -1,27 +1,34 @@
-"use client"
+"use client";
 
-import { ColumnDef } from "@tanstack/react-table"
+import CellActions from "@/components/cell-actions";
+import { Product } from "@prisma/client";
+import { ColumnDef } from "@tanstack/react-table";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type ProductData = {
-  id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
-}
 
-export const columns: ColumnDef<ProductData>[] = [
+export const columns: ColumnDef<Product>[] = [
   {
-    accessorKey: "status",
+    accessorKey: "name",
     header: "Produto",
   },
   {
-    accessorKey: "email",
+    accessorKey: "productQty",
     header: "Quantidade",
   },
   {
-    accessorKey: "amount",
-    header: "Ações",
+    id: "images",
+    header: "Imagens",
+    cell: ({ row }) => {
+      const original = row.original.images;
+      const length = JSON.parse(original as string).length;
+
+      return <div>{length}</div>;
+    },
   },
-]
+  {
+    header: "Ações",
+    id: "actions",
+    cell: ({ row }) => <CellActions data={row.original} />,
+  },
+];

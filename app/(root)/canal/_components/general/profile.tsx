@@ -1,6 +1,5 @@
-"use client";
+
 import { Button } from "@/components/ui/button";
-import { UploadButton } from "@/lib/uploadthing";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -22,13 +21,7 @@ const Profile: React.FC<ProfileProps> = ({
   liveQty,
   productQty,
 }) => {
-  const [isMounted, setIsMounted] = React.useState<boolean>(false);
 
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) return null;
   const liveQtyString = liveQty === 1 ? `${liveQty} live` : `${liveQty} lives`;
   const productQtyString =
     productQty === 1 ? `${productQty} produto` : `${productQty} produtos`;
@@ -59,21 +52,7 @@ const Profile: React.FC<ProfileProps> = ({
           </Button>
         </div>
       </div>
-      <UploadButton
-        endpoint="productImages"
-        onClientUploadComplete={(res) => {
-          // Do something with the response
-          console.log(
-            "Files: ",
-            res.map((item) => item.url)
-          );
-          alert("Upload Completed");
-        }}
-        onUploadError={(error: Error) => {
-          // Do something with the error.
-          alert(`ERROR! ${error.message}`);
-        }}
-      />
+
     </div>
   );
 };

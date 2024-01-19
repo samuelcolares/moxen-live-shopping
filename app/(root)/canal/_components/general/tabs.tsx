@@ -7,12 +7,13 @@ import { Separator } from "@/components/ui/separator";
 import { LivesTable } from "../live/live-table";
 import { LiveData, columns as asd } from "../live/live-table-columns";
 import { ProductTable } from "../product/product-table";
-import { ProductData, columns } from "../product/product-table-columns";
+import { columns } from "../product/product-table-columns";
+import { Product } from "@prisma/client";
 
 type TabsProps = {
   defaultValue: "lives" | "produtos";
   livesData: LiveData[];
-  produtosData: ProductData[];
+  produtosData: Product[];
 };
 
 const TabsToggle: React.FC<TabsProps> = ({

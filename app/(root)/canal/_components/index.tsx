@@ -4,7 +4,8 @@ import Profile from "./general/profile";
 import TabsToggle from "./general/tabs";
 import { cookies } from "next/headers";
 import { LiveData } from "./live/live-table-columns";
-import { ProductData } from "./product/product-table-columns";
+
+import { getProducts } from "@/lib/product-service";
 
 async function getData(): Promise<LiveData[]> {
   // Fetch data from your API here.
@@ -25,12 +26,13 @@ const Canal = async () => {
 
   const data = await getData();
   const user = await currentUser();
+  const products = await getProducts()
   if (!user) return null;
   return (
     <>
       <Profile
         liveQty={0}
-        productQty={12}
+        productQty={products.length}
         name={user.firstName!}
         surname={user.lastName!}
         username={user.username!}
@@ -39,7 +41,7 @@ const Canal = async () => {
       <TabsToggle
         defaultValue={defaulTabsValue}
         livesData={data}
-        produtosData={data as ProductData[]}
+        produtosData={products}
       />
     </>
   );
