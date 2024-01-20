@@ -1,7 +1,8 @@
-import { Product } from "@/types";
-import { getSelf } from "./auth-service";
-import { db } from "./db";
 import { NextResponse } from "next/server";
+import { getSelf } from "@/lib/auth-service";
+import { db } from "@/lib/db";
+
+import { Product } from "@/types";
 
 export const getProducts = async () => {
   const products = await db.product.findMany();
@@ -20,35 +21,45 @@ export const getUniqueProduct = async (id: string) => {
 };
 
 export const createProduct = async (data: Product) => {
-  const self = await getSelf();
+  try {
+    const self = await getSelf();
 
-  const product = await db.product.create({
-    data: {
-      userId: self.id,
-      images: data.images,
-      productQty: +data.productQty,
-      name: data.name,
-    },
-  });
+    const product = await db.product.create({
+      data: {
+        userId: self.id,
+        images: data.images,
+        productQty: +data.productQty,
+        name: data.name,
+      },
+    });
 
-  return NextResponse.json(product);
+    return NextResponse.json(product), { status: 200 };
+  } catch (error) {
+    console.log("Projeto Create Error", error);
+    return NextResponse.json("Internal Error"), { status: 500 };
+  }
 };
 
 export const updateProduct = async (id: string, data: Product) => {
-  const self = await getSelf();
-  const product = await db.product.updateMany({
-    where: {
-      userId: self.id,
-      id,
-    },
-    data: {
-      images: data.images,
-      productQty: +data.productQty,
-      name: data.name,
-    },
-  });
+  try {
+    const self = await getSelf();
+    const product = await db.product.updateMany({
+      where: {
+        userId: self.id,
+        id,
+      },
+      data: {
+        images: data.images,
+        productQty: +data.productQty,
+        name: data.name,
+      },
+    });
 
-  return NextResponse.json(product);
+    return NextResponse.json(product), { status: 200 };
+  } catch (error) {
+    console.log("Projeto Update Error", error);
+    return NextResponse.json("Internal Error"), { status: 500 };
+  }
 };
 
 export const deleteProduct = async (id: string) => {

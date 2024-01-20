@@ -4,8 +4,6 @@ import CellActions from "@/components/cell-actions";
 import { Product } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
 
 export const columns: ColumnDef<Product>[] = [
   {
@@ -29,6 +27,6 @@ export const columns: ColumnDef<Product>[] = [
   {
     header: "Ações",
     id: "actions",
-    cell: ({ row }) => <CellActions data={row.original} />,
+    cell: ({ row }) => <CellActions data={row.original} tab="produto"/>,
   },
 ];

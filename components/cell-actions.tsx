@@ -11,18 +11,26 @@ import {
 import { onDeleteProduct } from "@/app/actions/product-actions";
 import { toast } from "sonner";
 import AlertModal from "./alert-dialog-modal";
-import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
+import { onDeleteLive } from "@/app/actions/live-actions";
 
 type CellActionsProps = {
   data: Product | Live;
+  tab: "produto" | "live";
 };
 
-const CellActions: React.FC<CellActionsProps> = ({ data }) => {
+const CellActions: React.FC<CellActionsProps> = ({ data, tab }) => {
   const deleteProduct = () => {
     try {
-      onDeleteProduct(data.id)
-        .then(() => toast.warning("Produto deletado!"))
-        .catch(() => toast.error("Error ao deletar o produto!"));
+      if (tab === "produto") {
+        onDeleteProduct(data.id)
+          .then(() => toast.warning("Produto deletado!"))
+          .catch(() => toast.error("Error ao deletar o produto!"));
+      }
+      if (tab === "live") {
+        onDeleteLive(data.id)
+          .then(() => toast.warning("Live deletada!"))
+          .catch(() => toast.error("Error ao deletar live!"));
+      }
     } catch (error) {
       console.log(error);
       toast.error(
@@ -30,13 +38,19 @@ const CellActions: React.FC<CellActionsProps> = ({ data }) => {
       );
     }
   };
+
+  const alertModalDescription =
+    tab === "produto"
+      ? "Esta ação é irreversível. Isso irá permanentemente deletar este produto e remover seus dados de nosso servidor."
+      : "Esta ação é irreversível. Isso irá permanentemente deletar esta live e remover os dados de nosso servidor.";
+
   return (
     <TooltipProvider delayDuration={0}>
       <div className="flex gap-3">
         <Eye className="w-5 h-5" />
         <Tooltip>
           <TooltipTrigger asChild>
-            <Link href={`/canal/produto/${data.id}`}>
+            <Link href={`/canal/${tab}/${data.id}`}>
               <PencilIcon className="w-5 h-5" />
             </Link>
           </TooltipTrigger>
@@ -47,15 +61,16 @@ const CellActions: React.FC<CellActionsProps> = ({ data }) => {
         <Tooltip>
           <TooltipTrigger>
             <AlertModal
-              description="Esta ação é irreversível. Isso irá permanentemente deletar este
-    produto e remover seus dados de nosso servidor."
+              description={alertModalDescription}
               deleteFunction={deleteProduct}
             >
               <Trash className="w-5 h-5 hover:text-red-700" />
             </AlertModal>
           </TooltipTrigger>
           <TooltipContent>
-            <p className="text-sm">Deletar Produto</p>
+            <p className="text-sm">
+              Deletar {tab === "produto" ? "Produto" : "Live"}
+            </p>
           </TooltipContent>
         </Tooltip>
       </div>

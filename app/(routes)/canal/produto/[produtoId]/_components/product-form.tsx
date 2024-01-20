@@ -68,7 +68,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
       ? {
           productName: initialData.name,
           productQty: initialData.productQty.toString(),
-          productImages: JSON.parse(initialData.images as string),
+          productImages: JSON.parse(initialData.images as string).map(
+            (image: string) => ({ value: image })
+          ),
         }
       : {
           productName: "",
@@ -83,9 +85,11 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    const mappedImages = values.productImages.map((image) => image.value);
+
     const data: ProductType = {
       name: values.productName,
-      images: JSON.stringify(values.productImages),
+      images: JSON.stringify(mappedImages),
       productQty: values.productQty,
     };
     try {
@@ -100,7 +104,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("Algo de errado aconteceu, visualize o console para mais informações");
+      toast.error(
+        "Algo de errado aconteceu, visualize o console para mais informações"
+      );
     } finally {
       router.push("/canal");
     }
@@ -138,7 +144,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
         .catch(() => toast.error("Error ao deletar o produto!"));
     } catch (error) {
       console.log(error);
-      toast.error("Algo de errado aconteceu, visualize o console para mais informações");
+      toast.error(
+        "Algo de errado aconteceu, visualize o console para mais informações"
+      );
     } finally {
       router.push("/canal");
     }
@@ -168,7 +176,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
       <Separator className="max-w-[700px] mx-auto" />
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-2 max-w-[700px] border rounded-md p-2 mx-auto flex flex-col"
+        className="space-y-2 max-w-[700px] border rounded-md p-4 mx-auto flex flex-col"
       >
         <div className="flex gap-4 mb-3">
           <FormField

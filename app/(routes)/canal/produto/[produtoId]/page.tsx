@@ -10,7 +10,7 @@ const FormProdutoPage = async ({
   const product = await getUniqueProduct(params.produtoId);
 
   return (
-    <div className="space-y-4 p-8 ">
+    <div className="space-y-4 p-8">
       <ProductForm initialData={product} />
     </div>
   );

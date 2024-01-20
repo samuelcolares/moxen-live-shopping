@@ -1,7 +1,7 @@
 import React from "react";
 import Canal from "./_components";
 
-const SeuCanalPage = async () => {
+const SeuCanalPage = () => {
   return (
     <section className="p-4">
       <Canal />

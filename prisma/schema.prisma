@@ -12,24 +12,25 @@ generator client {
 }
 
 model User {
-  id             String @id @default(cuid())
-  username       String @unique
-  imageUrl       String @db.Text
-  externalUserId String @unique
+  id             String    @id @default(cuid())
+  username       String    @unique
+  imageUrl       String    @db.Text
+  externalUserId String    @unique
+  Live           Live[]    @relation("UserToLive")
+  Product        Product[] @relation("UserToProduct")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Live      Live?
-  Product   Product?
 }
 
 model Product {
   id         String   @id @default(cuid())
-  userId     String   @unique
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User     @relation("UserToProduct", fields: [userId], references: [id], onDelete: Cascade)
   name       String
   images     Json
   productQty Int
+
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
@@ -38,15 +39,16 @@ model Product {
 
 model Live {
   id           String   @id @default(cuid())
-  userId       String   @unique
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
   username     String
+  User         User     @relation("UserToLive", fields: [userId], references: [id], onDelete: Cascade)
   title        String
-  description  String?  @db.Text
-  thumbnailUrl String?  @db.Text
+  description  String   @db.Text
+  thumbnailUrl String   @db.Text
   dateStart    DateTime
   dateEnd      DateTime
   products     Json
+
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
