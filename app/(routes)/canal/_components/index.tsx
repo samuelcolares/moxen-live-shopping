@@ -4,18 +4,16 @@ import Profile from "./general/profile";
 import TabsToggle from "./general/tabs";
 import { cookies } from "next/headers";
 
-
-import { getProducts } from "@/lib/product-service";
-import { getLives } from "@/lib/live-service";
-
+import { getProductsByUserId } from "@/lib/product-service";
+import { getLivesByUserId } from "@/lib/live-service";
 
 const Canal = async () => {
   const tabsValue = cookies().get("tabs-choice:value");
   const defaulTabsValue = tabsValue ? JSON.parse(tabsValue.value) : undefined;
 
   const user = await currentUser();
-  const products = await getProducts();
-  const lives = await getLives()
+  const products = await getProductsByUserId();
+  const lives = await getLivesByUserId();
   if (!user) return null;
   return (
     <>

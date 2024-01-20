@@ -37,7 +37,9 @@ import {
   onCreateLive,
   onDeleteLive,
   onUpdateLive,
-} from "@/app/actions/live-actions";
+} from "@/actions/live-actions";
+import { cn } from "@/lib/utils";
+import { DialogClose } from "@/components/ui/dialog";
 
 const formSchema = z.object({
   liveTitle: z.string().min(4, {
@@ -69,6 +71,7 @@ const formSchema = z.object({
 type ZodSchema = z.infer<typeof formSchema>;
 
 type LiveFormProps = {
+  isModal?: boolean;
   initialData: LivePrismaType | null;
   products: Product[];
 };
@@ -76,6 +79,7 @@ type LiveFormProps = {
 export const LiveForm: React.FC<LiveFormProps> = ({
   initialData,
   products,
+  isModal = false,
 }) => {
   const params: { liveId: string } = useParams();
   const router = useRouter();
@@ -163,7 +167,8 @@ export const LiveForm: React.FC<LiveFormProps> = ({
         "Algo de errado aconteceu, visualize o console para mais informações"
       );
     } finally {
-      if (!err) router.push("/canal");
+      if (isModal && !err) return router.push(`/live/${initialData?.id}`);
+      if (!err) return router.push("/canal");
     }
   }
 
@@ -204,14 +209,21 @@ export const LiveForm: React.FC<LiveFormProps> = ({
 
   return (
     <Form {...form}>
-      <div className="flex justify-between max-w-5xl mx-auto">
-        <Heading title={title} />
-        {initialData && deleteButton}
-      </div>
-      <Separator className="max-w-5xl mx-auto" />
+      {!isModal && (
+        <>
+          <div className="flex justify-between max-w-5xl mx-auto">
+            <Heading title={title} />
+            {initialData && deleteButton}
+          </div>
+          <Separator className="max-w-5xl mx-auto" />
+        </>
+      )}
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4 max-w-5xl border rounded-md p-4 mx-auto flex flex-col"
+        className={cn(
+          "space-y-4 max-w-5xl border rounded-md p-4 mx-auto flex flex-col",
+          isModal && "p-0 border-0 rounded-none"
+        )}
       >
         <FormField
           control={form.control}
@@ -370,9 +382,18 @@ export const LiveForm: React.FC<LiveFormProps> = ({
             />
           </div>
         </div>
-        <Button type="submit" className="w-fit ml-auto">
-          {buttonText}
-        </Button>
+        {!isModal && (
+          <Button type="submit" className="w-fit ml-auto">
+            {buttonText}
+          </Button>
+        )}
+        {isModal && (
+          <DialogClose asChild>
+            <Button type="submit" className="w-fit ml-auto">
+              {buttonText}
+            </Button>
+          </DialogClose>
+        )}
       </form>
     </Form>
   );

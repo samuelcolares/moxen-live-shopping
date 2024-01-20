@@ -3,7 +3,8 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Live } from "@prisma/client";
 import dayjs from "dayjs";
-import CellActions from "@/components/cell-actions";
+import CellActions from "./live-cell-action";
+
 
 export const columns: ColumnDef<Live>[] = [
   {
@@ -39,7 +40,7 @@ export const columns: ColumnDef<Live>[] = [
   {
     header: "Ações",
     id: "actions",
-    cell: ({ row }) => <CellActions data={row.original} tab="live" />,
+    cell: ({ row }) => <CellActions data={row.original}/>,
   },
 ];
 

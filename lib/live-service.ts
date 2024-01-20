@@ -3,9 +3,21 @@ import { getSelf } from "@/lib/auth-service";
 import { db } from "@/lib/db";
 
 import { Live } from "@/types";
+import { notFound } from "next/navigation";
 
 export const getLives = async () => {
   const lives = await db.live.findMany();
+
+  return lives;
+};
+
+export const getLivesByUserId = async () => {
+  const self = await getSelf();
+  const lives = await db.live.findMany({
+    where: {
+      userId: self.id,
+    },
+  });
 
   return lives;
 };
@@ -18,6 +30,30 @@ export const getUniqueLive = async (id: string) => {
   });
 
   return live;
+};
+
+export const getLiveAndUserInfo = async (id: string) => {
+  const live = await db.live.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!live) {
+    return notFound();
+  }
+
+  const contentCreator = await db.user.findFirst({
+    where: {
+      id: live.userId,
+    },
+  });
+
+  if (!contentCreator) {
+    return notFound();
+  }
+
+  return {live, contentCreator};
 };
 
 export const createLive = async (data: Live) => {
@@ -74,6 +110,7 @@ export const updateLive = async (id: string, data: Live) => {
     return NextResponse.json("Internal Error"), { status: 500 };
   }
 };
+
 
 export const deleteLive = async (id: string) => {
   try {

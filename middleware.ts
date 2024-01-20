@@ -10,6 +10,7 @@ export default authMiddleware({
     "/api/uploadthing",
     "/search",
     "/api/productImages",
+    "/live(.*)"
   ],
 });
 

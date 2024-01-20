@@ -11,4 +11,14 @@ export type Live = {
   dateStart: Date;
   dateEnd: Date;
   products: string;
-}
+};
+
+export type ParsedLiveProduct = {
+  createdAt: string;
+  updatedAt: string;
+  id: string;
+  userId: string;
+  name: string;
+  images: Array<string>;
+  productQty: number;
+};

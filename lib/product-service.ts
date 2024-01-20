@@ -4,8 +4,13 @@ import { db } from "@/lib/db";
 
 import { Product } from "@/types";
 
-export const getProducts = async () => {
-  const products = await db.product.findMany();
+export const getProductsByUserId = async () => {
+  const self = await getSelf();
+  const products = await db.product.findMany({
+    where: {
+      userId: self.id,
+    },
+  });
 
   return products;
 };

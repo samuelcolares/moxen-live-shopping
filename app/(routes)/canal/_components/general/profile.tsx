@@ -34,7 +34,7 @@ const Profile: React.FC<ProfileProps> = ({
         <h2 className="text-2xl">{`${name} ${surname}`}</h2>
         <ul className="flex gap-4 text-muted-foreground">
           <li>
-            <span>{username}</span>
+            <span>@{username}</span>
           </li>
           <li>
             <span>{liveQtyString}</span>

@@ -34,7 +34,7 @@ import {
   onCreateProduct,
   onDeleteProduct,
   onUpdateProduct,
-} from "@/app/actions/product-actions";
+} from "@/actions/product-actions";
 import { toast } from "sonner";
 
 const formSchema = z.object({
