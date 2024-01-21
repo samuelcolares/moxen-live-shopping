@@ -7,14 +7,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import AlertModal from "@/components/alert-dialog-modal";
+import AlertModal from "@/components/modal/alert-dialog-modal";
+import LiveDetailsModal from "@/components/modal/live-details-modal";
 import { toast } from "sonner";
 import { ExternalLink, PencilIcon, Trash } from "lucide-react";
 
 import { onDeleteLive } from "@/actions/live-actions";
 
 import { Live } from "@prisma/client";
-import LiveDetailsModal from "@/components/live-details-modal";
 
 type CellActionsProps = {
   data: Live;

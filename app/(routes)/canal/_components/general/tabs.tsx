@@ -3,12 +3,11 @@ import React from "react";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { LivesTable } from "../live/live-table";
-import { ProductTable } from "../product/product-table";
 import { columns as LiveColumns } from "../live/live-table-columns";
 import { columns as ProductColumns } from "../product/product-table-columns";
 
 import { Product, Live } from "@prisma/client";
+import { DataTable } from "@/components/data-table";
 
 type TabsProps = {
   defaultValue: "lives" | "produtos";
@@ -36,10 +35,20 @@ const TabsToggle: React.FC<TabsProps> = ({
         </TabsList>
       </div>
       <TabsContent value="lives">
-        <LivesTable columns={LiveColumns} data={livesData} />
+        <DataTable
+          columns={LiveColumns}
+          data={livesData}
+          placeholder="Filtre por Título da live"
+          columnId="title"
+        />
       </TabsContent>
       <TabsContent value="produtos">
-        <ProductTable columns={ProductColumns} data={produtosData} />
+        <DataTable
+          columns={ProductColumns}
+          data={produtosData}
+          placeholder="Filtre pelo nome do produto"
+          columnId="name"
+        />
       </TabsContent>
     </Tabs>
   );

@@ -1,6 +1,6 @@
 import { getProductsByUserId } from "@/lib/product-service";
 import React from "react";
-import { LiveForm } from "./_components/live-form";
+import { LiveForm } from "@/components/forms/live-form";
 import { getUniqueLive } from "@/lib/live-service";
 
 const FormLivePage = async ({ params }: { params: { liveId: string } }) => {

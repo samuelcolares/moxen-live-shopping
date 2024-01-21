@@ -1,5 +1,5 @@
 import React from "react";
-import { ProductForm } from "./_components/product-form";
+import { ProductForm } from "@/components/forms/product-form";
 import { getUniqueProduct } from "@/lib/product-service";
 
 const FormProdutoPage = async ({

@@ -20,7 +20,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
-import AlertModal from "@/components/alert-dialog-modal";
+import AlertModal from "@/components/modal/alert-dialog-modal";
 import { Trash2Icon } from "lucide-react";
 
 import { cn } from "@/lib/utils";

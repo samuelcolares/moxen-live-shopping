@@ -1,5 +1,4 @@
-import { getLiveAndUserInfo, getUniqueLive } from "@/lib/live-service";
-import { getUserById } from "@/lib/user-service";
+import { getLiveAndUserInfo } from "@/lib/live-service";
 import React from "react";
 import LiveFullDetailsPage from "./_components";
 import { currentUser } from "@clerk/nextjs";
@@ -7,7 +6,6 @@ import { currentUser } from "@clerk/nextjs";
 const LivePage = async ({ params }: { params: { liveId: string } }) => {
   const user = await currentUser();
   const { live, contentCreator } = await getLiveAndUserInfo(params.liveId);
-  // const live = await getUniqueLive(params.liveId)
 
   return (
     <section>

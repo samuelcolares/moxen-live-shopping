@@ -1,28 +1,18 @@
 import React from "react";
+
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Eye } from "lucide-react";
-import { Skeleton } from "./ui/skeleton";
-import Image from "next/image";
-import { ScrollArea } from "./ui/scroll-area";
-import { Live, Prisma } from "@prisma/client";
-import { ParsedLiveProduct } from "@/types";
-import { LiveForm } from "@/app/(routes)/canal/live/[liveId]/_components/live-form";
-import { Button } from "./ui/button";
-import { getProductsByUserId } from "@/lib/product-service";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
+import { Live } from "@prisma/client";
 
-type EditModalProps = {
-  title: string;
-  liveDescription: string;
-  thumbnail: string;
-  products: Prisma.JsonValue;
-};
+import { LiveForm } from "@/components/forms/live-form";
+import { getProductsByUserId } from "@/lib/product-service";
 
 const EditLiveModal = async ({ initialData }: { initialData: Live }) => {
   const products = await getProductsByUserId();

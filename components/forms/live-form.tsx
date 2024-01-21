@@ -7,6 +7,11 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { useParams, useRouter } from "next/navigation";
 import * as z from "zod";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 import {
   Form,
@@ -21,7 +26,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
-import AlertModal from "@/components/alert-dialog-modal";
+import AlertModal from "@/components/modal/alert-dialog-modal";
 import { Trash2Icon, Calendar as CalendarIcon } from "lucide-react";
 
 import { UploadDropzone } from "@/lib/uploadthing";
@@ -132,21 +137,26 @@ export const LiveForm: React.FC<LiveFormProps> = ({
       title: values.liveTitle,
       description: values.liveDescription,
       thumbnailUrl: values.liveThumbnailUrl[0].value,
-      dateStart: dayjs(values.dates.liveDateStart).toDate(),
-      dateEnd: dayjs(values.dates.liveDateEnd).toDate(),
+      dateStart: dayjs(values.dates.liveDateStart)
+        .tz("America/Sao_Paulo")
+        .toDate(),
+      dateEnd: dayjs(values.dates.liveDateEnd).tz("America/Sao_Paulo").toDate(),
       products: JSON.stringify(mappedProducts),
     };
 
     try {
       if (
-        dayjs(values.dates.liveDateStart).toDate() >
-        dayjs(values.dates.liveDateEnd).toDate()
+        +dayjs(values.dates.liveDateStart).tz("America/Sao_Paulo") >
+        +dayjs(values.dates.liveDateEnd).tz("America/Sao_Paulo")
       ) {
         err = true;
         return toast.error("data de término maior que data de início");
       }
 
-      if (dayjs(values.dates.liveDateStart).toDate() < dayjs().toDate()) {
+      if (
+        +dayjs().tz("America/Sao_Paulo") >
+        +dayjs(values.dates.liveDateStart).tz("America/Sao_Paulo")
+      ) {
         err = true;
         return toast.error(
           "data de início nao pode ser menor que a data atual"

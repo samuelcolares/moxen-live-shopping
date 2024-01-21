@@ -7,14 +7,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import AlertModal from "@/components/alert-dialog-modal";
+import AlertModal from "@/components/modal/alert-dialog-modal";
+import ProductGalleryModal from "@/components/modal/product-gallery-modal";
 import { toast } from "sonner";
 import { Eye, PencilIcon, Trash } from "lucide-react";
 
 import { onDeleteProduct } from "@/actions/product-actions";
 
 import { Product } from "@prisma/client";
-import ProductGalleryModal from "@/components/product-gallery-modal";
 
 type CellActionsProps = {
   data: Product;

@@ -18,8 +18,8 @@ export const Search = () => {
     if (!value) return;
 
     const url = qs.stringifyUrl({
-      url: "/search",
-      query: { term: value },
+      url: "/buscar",
+      query: { termo: value },
     }, { skipEmptyString: true });
 
     router.push(url);

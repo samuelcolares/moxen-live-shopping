@@ -1,8 +1,9 @@
-
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { AlertDemo } from "./alert";
 
 type ProfileProps = {
   userImg: string;
@@ -21,7 +22,6 @@ const Profile: React.FC<ProfileProps> = ({
   liveQty,
   productQty,
 }) => {
-
   const liveQtyString = liveQty === 1 ? `${liveQty} live` : `${liveQty} lives`;
   const productQtyString =
     productQty === 1 ? `${productQty} produto` : `${productQty} produtos`;
@@ -44,15 +44,30 @@ const Profile: React.FC<ProfileProps> = ({
           </li>
         </ul>
         <div className="flex gap-4">
-          <Button asChild className="rounded-md" variant={"secondary"}>
-            <Link href={"/canal/live/novaLive"}>Agendar Live</Link>
+          <Button
+            asChild
+            className={cn(
+              "rounded-md",
+              productQty === 0 && "opacity-50 hover:bg-secondary"
+            )}
+            variant={"secondary"}
+            disabled={productQty === 0}
+          >
+            <Link
+              href={productQty > 0 ? "/canal/live/novaLive" : "#"}
+              className={cn(productQty === 0 && "cursor-default")}
+            >
+              Agendar Live
+            </Link>
           </Button>
           <Button asChild className="rounded-md" variant={"secondary"}>
             <Link href={"/canal/produto/novoProduto"}>Cadastrar Produto</Link>
           </Button>
         </div>
+        {productQty === 0 && (
+          <AlertDemo description="Para agendar lives é preciso no mínimo 1 produto cadastrado." />
+        )}
       </div>
-
     </div>
   );
 };

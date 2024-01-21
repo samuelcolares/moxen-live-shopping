@@ -7,7 +7,6 @@ import { notFound } from "next/navigation";
 
 export const getLives = async () => {
   const lives = await db.live.findMany();
-
   return lives;
 };
 
@@ -65,6 +64,7 @@ export const createLive = async (data: Live) => {
 
     const live = await db.live.create({
       data: {
+        userImg: self.imageUrl,
         userId: self.id,
         username: self.username,
         dateEnd,

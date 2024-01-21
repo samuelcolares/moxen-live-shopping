@@ -9,11 +9,11 @@ export const ProductCard: React.FC<ParsedLiveProduct> = ({
 }) => {
   return (
     <Card className="bg-transparent flex flex-col">
-      <CardHeader className="py-2 px-4">
-        <CardTitle className="text-2xl lg:w-auto w-3/4">{name}</CardTitle>
+      <CardHeader className="py-2 px-2">
+        <CardTitle className="text-xl lg:w-auto w-3/4">{name}</CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col justify-between flex-1 px-4">
-        <p className="mb-4">
+      <CardContent className="flex flex-col justify-between flex-1 p-2">
+        <p className="mb-4 text-sm">
           Quantidades em oferta:{" "}
           {productQty === 1 ? "1 unidade." : `${productQty} unidades.`}
         </p>

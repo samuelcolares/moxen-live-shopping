@@ -7,7 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import Gallery from "./gallery";
+import Gallery from "../gallery";
 
 type ProductGalleryModalProps = {
   children: React.ReactNode;
