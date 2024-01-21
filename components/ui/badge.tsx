@@ -21,8 +21,8 @@ export const LiveBadge: React.FC<LiveBadgeProps> = ({
       className
     )}
   >
-    <Radio className={cn("w-4 h-4", iconClassName)} />
-    <p className={cn("text-sm", badgeClassName)}>LIVE</p>
+    <Radio className={cn("w-4 h-4 text-white", iconClassName)} />
+    <p className={cn("text-sm text-white", badgeClassName)}>LIVE</p>
   </div>
 );
 
@@ -36,6 +36,6 @@ export const LiveOverBadge: React.FC<Props> = ({
       className
     )}
   >
-    <p className={cn("text-sm", badgeClassName)}>LIVE ENCERRADA</p>
+    <p className={cn("text-sm text-white", badgeClassName)}>LIVE ENCERRADA</p>
   </div>
 );

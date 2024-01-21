@@ -178,7 +178,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-2 max-w-[700px] border rounded-md p-4 mx-auto flex flex-col"
       >
-        <div className="flex gap-4 mb-3">
+        <div className="flex flex-col lg:flex-row gap-4 mb-3">
           <FormField
             control={form.control}
             name="productName"
@@ -245,20 +245,14 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
                 remove(index);
               }}
             >
-              <span className="sr-only">Deletar campo de texto</span>
+              <span className="sr-only text-primary">
+                Deletar campo de texto
+              </span>
               <Trash2Icon className="w-4 h-4" />
             </Button>
           </div>
         ))}
-        <div className="flex gap-4">
-          <UploadButton
-            className="block text-sm"
-            endpoint="productImages"
-            onClientUploadComplete={onUploadComplete}
-            onUploadError={(error: Error) => {
-              alert(`ERROR! ${error.message}`);
-            }}
-          />
+        <div className="flex flex-col lg:flex-row gap-4 uploadButton">
           <Button
             type="button"
             variant="outline"
@@ -269,6 +263,14 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
           >
             Add URL manualmente
           </Button>
+          <UploadButton
+            className="block text-sm"
+            endpoint="productImages"
+            onClientUploadComplete={onUploadComplete}
+            onUploadError={(error: Error) => {
+              alert(`ERROR! ${error.message}`);
+            }}
+          />
         </div>
 
         <Button type="submit" className="w-fit ml-auto">

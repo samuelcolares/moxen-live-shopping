@@ -63,17 +63,24 @@ const LiveFullDetailsPage: React.FC<LivePageProps> = ({
             />
           </div>
           <div className="w-full">
-            <div className="flex justify-between items-center">
-              <h2 className="text-2xl max-w-4/5 truncate" title={live.title}>
+            <div className="flex lg:flex-row flex-col justify-between lg:items-center">
+              <h2
+                className="lg:text-2xl text-lg max-w-4/5 truncate"
+                title={live.title}
+              >
                 {live.title}
               </h2>
               {liveOwner && <EditLiveModal initialData={live} />}
             </div>
-            <h3 className="text-lg text-muted-foreground">@{user.username}</h3>
-            <ul className="text-md flex gap-2 text-muted-foreground">
-              <li>{dateStart.format("DD/MM - HH:mm")}</li>
-              <li>até</li>
-              <li>{dateEnd.format("DD/MM - HH:mm")}</li>
+            <h3 className="lg:text-lg text-sm text-muted-foreground">
+              @{user.username}
+            </h3>
+            <ul className="lg:text-base text-sm flex  lg:flex-row flex-col lg:gap-2 mt-2 lg:mt-0 text-muted-foreground">
+              <li className="hidden lg:block">{dateStart.format("DD/MM - HH:mm")}</li>
+              <li className="hidden lg:block">até</li>
+              <li className="hidden lg:block">{dateEnd.format("DD/MM - HH:mm")}</li>
+              <li className="lg:hidden">Início: {dateStart.format("DD/MM - HH:mm")}</li>
+              <li className="lg:hidden">Término: {dateEnd.format("DD/MM - HH:mm")}</li>
             </ul>
           </div>
         </div>
@@ -91,7 +98,7 @@ const LiveFullDetailsPage: React.FC<LivePageProps> = ({
               ? `Produto ofertado nesta live:`
               : `Produtos ofertados nesta live (${parsedProducts.length}):`}
           </h3>
-          <section className="grid grid-cols-3 gap-4">
+          <section className="grid lg:grid-cols-3 grid-cols-1 gap-4">
             {parsedProducts.map((product) => (
               <ProductCard key={product.id} {...product} />
             ))}

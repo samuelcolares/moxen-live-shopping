@@ -71,15 +71,15 @@ const CollapsedLinks: React.FC<LinksProps> = ({
           href={href}
           className={cn(
             buttonVariants({ variant: "ghost", size: "icon" }),
-            "h-9 w-9 hover:bg-gray-600",
-            href === pathname && "bg-gray-500 text-white hover:text-white"
+            "h-9 w-9 hover:text-[#1c152f] text-white",
+            href === pathname && "bg-gray-500 dark:hover:text-white"
           )}
         >
           <Icon className="h-5 w-5" />
           <span className="sr-only">{title}</span>
         </Link>
       </TooltipTrigger>
-      <TooltipContent side="right" className="ml-1 text-md">
+      <TooltipContent side="right" className="ml-1 text-md bg-[#1c152f]">
         {title}
       </TooltipContent>
     </Tooltip>

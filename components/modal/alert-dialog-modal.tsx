@@ -25,7 +25,7 @@ const AlertModal: React.FC<AlertModalProps> = ({
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent className="lg:w-auto w-4/5">
         <AlertDialogHeader>
           <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>
           <AlertDialogDescription>

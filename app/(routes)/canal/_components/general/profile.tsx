@@ -26,7 +26,7 @@ const Profile: React.FC<ProfileProps> = ({
   const productQtyString =
     productQty === 1 ? `${productQty} produto` : `${productQty} produtos`;
   return (
-    <div className="flex gap-4 mb-5 items-center">
+    <div className="flex lg:flex-row flex-col gap-4 mb-5 items-center">
       <div className="aspect-square rounded-md h-40 w-40 bg-slate-600 relative overflow-hidden">
         <Image src={userImg} fill alt={`${name}`} priority />
       </div>
@@ -47,7 +47,7 @@ const Profile: React.FC<ProfileProps> = ({
           <Button
             asChild
             className={cn(
-              "rounded-md",
+              "rounded-md bg-[#ced0d3] dark:bg-[#515152] dark:hover:bg-[#444444]",
               productQty === 0 && "opacity-50 hover:bg-secondary"
             )}
             variant={"secondary"}
@@ -60,7 +60,7 @@ const Profile: React.FC<ProfileProps> = ({
               Agendar Live
             </Link>
           </Button>
-          <Button asChild className="rounded-md" variant={"secondary"}>
+          <Button asChild className="rounded-md bg-[#ced0d3] dark:bg-[#515152] dark:hover:bg-[#444444]" variant={"secondary"}>
             <Link href={"/canal/produto/novoProduto"}>Cadastrar Produto</Link>
           </Button>
         </div>

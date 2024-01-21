@@ -7,14 +7,14 @@ import Image from "next/image";
 
 export const LiveSearchCard = ({ live }: { live: Live }) => (
   <Link href={`/live/${live.id}`}>
-    <div className="flex p-0 gap-4">
-      <div className="relative overflow-hidden bg-gray-800 aspect-video min-w-80 w-80 h-full rounded-md">
+    <div className="flex lg:flex-row flex-col p-0 gap-4">
+      <div className="relative overflow-hidden bg-gray-800 aspect-video lg:min-w-80 lg:w-80 min-w-64 w-64 h-full rounded-md">
         <Image fill src={live.thumbnailUrl} alt={live.title} />
       </div>
       <div className="w-full flex flex-col">
-        <p className="text-2xl font-semibold">{live.title}</p>
+        <p className="lg:text-2xl text-lg font-semibold">{live.title}</p>
 
-        <ul className="text-base flex gap-2 text-muted-foreground">
+        <ul className="lg:text-base text-sm flex gap-2 text-muted-foreground">
           <li>{dayjs(live.dateStart).format("DD/MM - HH:mm")}</li>
           <li>até</li>
           <li>{dayjs(live.dateEnd).format("DD/MM - HH:mm")}</li>
@@ -27,10 +27,10 @@ export const LiveSearchCard = ({ live }: { live: Live }) => (
             src={live.userImg}
             fallback={live.username[0].toUpperCase()}
           />
-          <p className="text-base text-muted-foreground">@{live.username}</p>
+          <p className="lg:text-base text-sm text-muted-foreground">@{live.username}</p>
         </div>
 
-        <ScrollArea className="max-w-2xl h-14">{live.description}</ScrollArea>
+        <ScrollArea className="hidden lg:block max-w-2xl h-14">{live.description}</ScrollArea>
       </div>
     </div>
   </Link>

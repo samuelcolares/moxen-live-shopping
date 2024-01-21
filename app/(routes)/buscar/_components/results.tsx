@@ -23,11 +23,11 @@ export const Results: React.FC<ResultsProp> = async ({ term }) => {
         </p>
       )}
       {data.length > 0 && (
-        <ul className="flex flex-col gap-4 pl-6">
+        <ul className="flex flex-col gap-4 lg:pl-6">
           {data.map((live) => (
             <li
               key={live.id}
-              className="w-fit hover:bg-white/10 rounded-md transition p-2"
+              className="w-fit dark:hover:bg-white/10 hover:bg-primary/20 rounded-md transition lg:p-2"
             >
               <LiveSearchCard live={live} />
             </li>

@@ -22,7 +22,7 @@ const LiveCard: React.FC<LiveCardProps> = ({ live, isLive }) => {
     <Card className="">
       <Link href={`/live/${live.id}`}>
         <CardContent className="flex flex-col gap-4 p-2 justify-center group">
-          <div className="relative aspect-video bg-gray-800 w-full rounded-md overflow-hidden">
+          <div className="relative aspect-video bg-gray-800 w-full rounded-md overflow-hidden shadow-lg">
             <Image
               className="object-cover"
               fill

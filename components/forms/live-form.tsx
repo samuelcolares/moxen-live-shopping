@@ -27,7 +27,7 @@ import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import AlertModal from "@/components/modal/alert-dialog-modal";
-import { Trash2Icon, Calendar as CalendarIcon } from "lucide-react";
+import { Trash2Icon } from "lucide-react";
 
 import { UploadDropzone } from "@/lib/uploadthing";
 
@@ -248,12 +248,12 @@ export const LiveForm: React.FC<LiveFormProps> = ({
             </FormItem>
           )}
         />
-        <div className="flex gap-4 mb-3">
+        <div className="flex lg:flex-row flex-col gap-4 mb-3">
           <FormField
             control={form.control}
             name="liveDescription"
             render={({ field }) => (
-              <FormItem className="basis-3/4">
+              <FormItem className="lg:basis-3/4">
                 <FormLabel>Descrição da live</FormLabel>
                 <FormControl>
                   <Textarea
@@ -266,7 +266,7 @@ export const LiveForm: React.FC<LiveFormProps> = ({
               </FormItem>
             )}
           />
-          <div className="basis-1/4 flex flex-col justify-between">
+          <div className="lg:basis-1/4 flex flex-col justify-between">
             <FormField
               control={form.control}
               name="dates.liveDateStart"
@@ -303,7 +303,7 @@ export const LiveForm: React.FC<LiveFormProps> = ({
             />
           </div>
         </div>
-        <div className="flex gap-4 mb-3">
+        <div className="flex  lg:flex-row flex-col gap-4 mb-3">
           <div className="basis-3/4 border rounded-md p-2 flex flex-col gap-4">
             {fields.map((field, index) => (
               <FormField
@@ -331,7 +331,7 @@ export const LiveForm: React.FC<LiveFormProps> = ({
                 )}
               />
             ))}
-            <div className="border hover:border-dashed rounded-md">
+            <div className="border hover:border-dashed rounded-md dropzone">
               <UploadDropzone
                 endpoint="thumbnailUploader"
                 onClientUploadComplete={onUploadComplete}

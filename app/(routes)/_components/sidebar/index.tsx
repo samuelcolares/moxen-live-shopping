@@ -11,8 +11,7 @@ import {
 import { Sidebar } from "./nav";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { asideNavbarLinks } from "@/routes";
-import { Button } from "@/components/ui/button";
-import { ArrowLeftFromLine } from "lucide-react";
+
 
 type WrapperProps = {
   children: React.ReactNode;
@@ -58,7 +57,7 @@ const SidebarWrapper: React.FC<WrapperProps> = ({
             )}`;
           }}
           className={cn(
-            "transition-all duration-100 bg-[#1f2937] shadow-md shadow-black/70 min-w-[170px] max-w-[180px]",
+            "transition-all duration-100 dark:bg-[#100d1d] bg-primary shadow-md shadow-black/70 min-w-[170px] max-w-[170px]",
             isCollapsed && "min-w-[50px] max-w-[50px] duration-300 ease-in-out"
           )}
         >
@@ -67,8 +66,8 @@ const SidebarWrapper: React.FC<WrapperProps> = ({
             links={asideNavbarLinks}
           />
         </ResizablePanel>
-        <ResizableHandle withHandle />
-        <ResizablePanel defaultSize={defaultLayout[1]}>
+        <ResizableHandle withHandle className="hidden lg:flex" />
+        <ResizablePanel defaultSize={defaultLayout[1]} className="dark:bg-[#0a0813]">
           {children}
         </ResizablePanel>
       </ResizablePanelGroup>

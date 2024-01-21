@@ -8,7 +8,7 @@ const FormLivePage = async ({ params }: { params: { liveId: string } }) => {
   const live = await getUniqueLive(params.liveId);
 
   return (
-    <div className="space-y-4 p-8">
+    <div className="space-y-4 lg:p-8 p-2">
       <LiveForm initialData={live} products={products} />
     </div>
   );

@@ -5,6 +5,9 @@ import { currentUser } from "@clerk/nextjs";
 
 const LivePage = async ({ params }: { params: { liveId: string } }) => {
   const user = await currentUser();
+  let id;
+  if (!user) id = `0`;
+  if (user) id = user.id;
   const { live, contentCreator } = await getLiveAndUserInfo(params.liveId);
 
   return (

@@ -25,7 +25,7 @@ const ProductGalleryModal: React.FC<ProductGalleryModalProps> = ({
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="xl:max-w-[700px]">
+      <DialogContent className="lg:w-full xl:max-w-[700px] lg:max-w-[500px] w-4/5">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>
