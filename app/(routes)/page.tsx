@@ -11,7 +11,7 @@ import Link from "next/link";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-const revalidate = 0;
+export const revalidate = 0;
 
 const HomePage = async () => {
   const lives = await getLives();

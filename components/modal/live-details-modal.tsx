@@ -1,9 +1,7 @@
-"use client";
-import React from "react";
+import React, { Suspense } from "react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -28,12 +26,6 @@ const LiveDetailsModal: React.FC<LiveDetailsModalProps> = ({
   thumbnail,
   products,
 }) => {
-  const [isMounted, setIsMounted] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
   const Products = JSON.parse(products as string) as ParsedLiveProduct[];
 
   return (
@@ -52,15 +44,14 @@ const LiveDetailsModal: React.FC<LiveDetailsModalProps> = ({
         <ScrollArea className="h-[600px] p-4">
           <div className="space-y-4">
             <div className="aspect-video relative w-full h-full sm:rounded-lg overflow-hidden border">
-              {!isMounted && <Skeleton className="h-full" />}
-              {isMounted && (
+              <Suspense fallback={<Skeleton className="h-full" />}>
                 <Image
                   fill
                   src={thumbnail}
                   alt={`${title}`}
-                  className="object-contain object-center"
+                  className="object-cover object-center"
                 />
-              )}
+              </Suspense>
             </div>
             <div className="border rounded-md p-2 space-y-2">
               <h3>Descrição:</h3>

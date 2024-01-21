@@ -1,11 +1,24 @@
-import React from 'react'
+import { redirect } from "next/navigation";
+import React, { Suspense } from "react";
+import { Results, ResultsSkeleton } from "./_components/results";
 
-const BuscarPage = () => {
+type SearchPageProps = {
+  searchParams: {
+    termo?: string;
+  };
+};
+
+const BuscarPage = ({ searchParams }: SearchPageProps) => {
+  if (!searchParams.termo) {
+    redirect("/");
+  }
   return (
-    <div>
+    <section className="w-full p-4 h-full">
+      <Suspense fallback={<ResultsSkeleton term={searchParams.termo}/>}>
+        <Results term={searchParams.termo} />
+      </Suspense>
+    </section>
+  );
+};
 
-    </div>
-  )
-}
-
-export default BuscarPage
+export default BuscarPage;

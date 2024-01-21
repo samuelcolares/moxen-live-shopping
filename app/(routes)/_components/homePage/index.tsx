@@ -1,5 +1,4 @@
-"use client";
-import React from "react";
+import React, { Suspense } from "react";
 
 import { LucideIcon } from "lucide-react";
 import { CalendarRange, MonitorCheck, Radio } from "lucide-react";
@@ -28,12 +27,6 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
   lives,
   isLive,
 }) => {
-  const [isMounted, setIsMounted] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
   const Icon = icons[icon];
   return (
     <section>
@@ -42,8 +35,9 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
         <span>{title}</span>
       </h2>
       <div className="w-full flex justify-center mb-12">
-        {!isMounted && <CarouselSkeleton />}
-        {isMounted && <CarouselLives lives={lives} isLive={isLive} />}
+        <Suspense fallback={<CarouselSkeleton />}>
+          <CarouselLives lives={lives} isLive={isLive} />
+        </Suspense>
       </div>
     </section>
   );

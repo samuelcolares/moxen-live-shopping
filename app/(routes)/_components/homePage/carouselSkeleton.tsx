@@ -39,8 +39,8 @@ export default function CarouselSkeleton() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="top-auto -bottom-14 left-auto right-12 z-10" />
-      <CarouselNext className="top-auto -bottom-14 right-2 z-10" />
+      <CarouselPrevious className="top-auto -bottom-14 left-0 z-10" />
+      <CarouselNext className="top-auto -bottom-14 left-10 z-10" />
     </Carousel>
   );
 }

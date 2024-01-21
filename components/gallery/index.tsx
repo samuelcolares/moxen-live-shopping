@@ -1,10 +1,8 @@
-"use client";
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 import { Tab } from "@headlessui/react";
 import GalleryTab from "./gallery-tab";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ScrollArea } from "../ui/scroll-area";
 
 type GalleryProps = {
   title: string;
@@ -12,12 +10,6 @@ type GalleryProps = {
 };
 
 const Gallery: React.FC<GalleryProps> = ({ images, title }) => {
-  const [isMounted, setIsMounted] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
   const mappedImages = images.map((image, index) => (
     <GalleryTab
       key={image + index}
@@ -29,15 +21,14 @@ const Gallery: React.FC<GalleryProps> = ({ images, title }) => {
   const mappedImagesPanel = images.map((image, index) => (
     <Tab.Panel key={image + index}>
       <div className="aspect-video relative w-full h-full sm:rounded-lg overflow-hidden border">
-        {!isMounted && <Skeleton className="h-full" />}
-        {isMounted && (
+        <Suspense fallback={<Skeleton className="h-full" />}>
           <Image
             fill
             src={image}
             alt={`${title} selected slide`}
             className="object-contain object-center"
           />
-        )}
+        </Suspense>
       </div>
     </Tab.Panel>
   ));
@@ -48,15 +39,20 @@ const Gallery: React.FC<GalleryProps> = ({ images, title }) => {
       </Tab.Panels>
       <div className="mx-auto mt-2 w-full max-w-2xl  lg:max-w-none">
         <Tab.List className="grid grid-cols-5 gap-4">
-          {!isMounted &&
-            [...Array(5)].map((_, i) => (
-              <Skeleton key={i} className="aspect-square" />
-            ))}
-          {isMounted && mappedImages}
+          <Suspense fallback={<ImagesMapSkell />}>{mappedImages}</Suspense>
         </Tab.List>
       </div>
     </Tab.Group>
   );
 };
 
+const ImagesMapSkell = () => {
+  return (
+    <>
+      {[...Array(5)].map((_, i) => (
+        <Skeleton key={i} className="aspect-square" />
+      ))}
+    </>
+  );
+};
 export default Gallery;

@@ -9,6 +9,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 model User {
@@ -54,4 +55,5 @@ model Live {
   updatedAt DateTime @updatedAt
 
   @@index([userId])
+  @@fulltext([title])
 }
