@@ -71,8 +71,8 @@ const CollapsedLinks: React.FC<LinksProps> = ({
           href={href}
           className={cn(
             buttonVariants({ variant: "ghost", size: "icon" }),
-            "h-9 w-9 hover:text-[#1c152f] text-white",
-            href === pathname && "bg-gray-500 dark:hover:text-white"
+            "h-9 w-9 text-white hover:text-white hover:bg-white/10",
+            href === pathname && "bg-white/20"
           )}
         >
           <Icon className="h-5 w-5" />
@@ -96,8 +96,8 @@ const ExtendedLinks: React.FC<LinksProps> = ({
     href={href}
     className={cn(
       buttonVariants({ variant: "ghost", size: "sm" }),
-      href === pathname && "bg-gray-500 text-white hover:text-white",
-      "justify-start hover:bg-gray-600 text-white"
+      href === pathname && "bg-white/20",
+      "justify-start text-white hover:text-white hover:bg-white/10"
     )}
   >
     <Icon className="mr-2 h-5 w-5" />
