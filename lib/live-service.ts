@@ -95,6 +95,7 @@ export const updateLive = async (id: string, data: Live) => {
       },
       data: {
         username: self.username,
+        userImg: self.imageUrl,
         dateEnd,
         dateStart,
         description,

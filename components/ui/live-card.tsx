@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 
 import { Live } from "@prisma/client";
-import { LiveBadge, LiveOverBadge } from "./badge";
+import { LiveBadge, LiveOverBadge, LiveScheduledBadge } from "./badge";
 import ProfileAvatar from "./profile-avatar";
 import dayjs from "dayjs";
 
@@ -17,6 +17,7 @@ type LiveCardProps = {
 const LiveCard: React.FC<LiveCardProps> = ({ live, isLive }) => {
   const liveBadge = isLive === "live" && <LiveBadge />;
   const overBadge = isLive === "over" && <LiveOverBadge />;
+  const scheduledBadge = isLive === "soon" && <LiveScheduledBadge dateStart={live.dateStart}/>;
 
   return (
     <Card className="">
@@ -31,6 +32,7 @@ const LiveCard: React.FC<LiveCardProps> = ({ live, isLive }) => {
             />
             {liveBadge}
             {overBadge}
+            {scheduledBadge}
           </div>
           <div className="flex gap-4">
             <div className="relative overflow-hidden rounded-full aspect-square min-w-12 h-12 bg-gray-900">

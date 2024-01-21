@@ -154,8 +154,9 @@ export const LiveForm: React.FC<LiveFormProps> = ({
       }
 
       if (
+        !initialData &&
         +dayjs().tz("America/Sao_Paulo") >
-        +dayjs(values.dates.liveDateStart).tz("America/Sao_Paulo")
+          +dayjs(values.dates.liveDateStart).tz("America/Sao_Paulo")
       ) {
         err = true;
         return toast.error(

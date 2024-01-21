@@ -257,11 +257,14 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
             type="button"
             variant="outline"
             size="sm"
-            className="h-10 w-fit text-sm"
+            className={cn(
+              "h-10 w-fit text-sm",
+              fields.length === 5 && "hidden"
+            )}
             onClick={() => append({ value: "" })}
             disabled={fields.length === 5}
           >
-            Add URL manualmente
+            Adicionar URL
           </Button>
           <UploadButton
             className="block text-sm"

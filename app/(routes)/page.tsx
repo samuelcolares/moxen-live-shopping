@@ -51,7 +51,7 @@ const HomePage = async () => {
     <section className="w-full p-4">
       {activeLives.length > 0 && (
         <HomeSection
-          title="Lives ativas"
+          title="Ao vivo"
           lives={activeLives}
           icon="live"
           isLive="live"

@@ -3,7 +3,11 @@ import Image from "next/image";
 
 import { ProductCard } from "@/components/ui/product-card";
 import EditLiveModal from "@/components/modal/edit-live-modal";
-import { LiveBadge, LiveOverBadge } from "@/components/ui/badge";
+import {
+  LiveBadge,
+  LiveOverBadge,
+  LiveScheduledBadge,
+} from "@/components/ui/badge";
 import ProfileAvatar from "@/components/ui/profile-avatar";
 
 import { Live, User } from "@prisma/client";
@@ -26,12 +30,12 @@ const LiveFullDetailsPage: React.FC<LivePageProps> = ({
   user,
   liveOwner,
 }) => {
-  const date = dayjs().tz("America/Sao_Paulo");
-  const dateStart = dayjs(live.dateStart);
-  const dateEnd = dayjs(live.dateEnd);
   const parsedProducts = JSON.parse(
     live.products as string
   ) as ParsedLiveProduct[];
+  const date = dayjs().tz("America/Sao_Paulo");
+  const dateStart = dayjs(live.dateStart);
+  const dateEnd = dayjs(live.dateEnd);
 
   const isLive = +date > +dateStart && +date < +dateEnd && (
     <LiveBadge
@@ -43,6 +47,14 @@ const LiveFullDetailsPage: React.FC<LivePageProps> = ({
   const LiveOver = +date > +dateEnd && (
     <LiveOverBadge className="top-4 left-4" badgeClassName="text-base" />
   );
+  const LiveScheduled = +date < +dateStart && (
+    <LiveScheduledBadge
+      className="top-4 left-4 gap-2"
+      iconClassName="w-6 h-6"
+      badgeClassName="text-base"
+      dateStart={live.dateStart}
+    />
+  );
 
   return (
     <section className="w-full p-4 flex justify-center">
@@ -51,6 +63,7 @@ const LiveFullDetailsPage: React.FC<LivePageProps> = ({
           <Image fill src={live.thumbnailUrl} alt={live.title} />
           {isLive}
           {LiveOver}
+          {LiveScheduled}
         </div>
 
         <div className="flex gap-4">
@@ -76,11 +89,19 @@ const LiveFullDetailsPage: React.FC<LivePageProps> = ({
               @{user.username}
             </h3>
             <ul className="lg:text-base text-sm flex  lg:flex-row flex-col lg:gap-2 mt-2 lg:mt-0 text-muted-foreground">
-              <li className="hidden lg:block">{dateStart.format("DD/MM - HH:mm")}</li>
+              <li className="hidden lg:block">
+                {dateStart.format("DD/MM - HH:mm")}
+              </li>
               <li className="hidden lg:block">até</li>
-              <li className="hidden lg:block">{dateEnd.format("DD/MM - HH:mm")}</li>
-              <li className="lg:hidden">Início: {dateStart.format("DD/MM - HH:mm")}</li>
-              <li className="lg:hidden">Término: {dateEnd.format("DD/MM - HH:mm")}</li>
+              <li className="hidden lg:block">
+                {dateEnd.format("DD/MM - HH:mm")}
+              </li>
+              <li className="lg:hidden">
+                Início: {dateStart.format("DD/MM - HH:mm")}
+              </li>
+              <li className="lg:hidden">
+                Término: {dateEnd.format("DD/MM - HH:mm")}
+              </li>
             </ul>
           </div>
         </div>
