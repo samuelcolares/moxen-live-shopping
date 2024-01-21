@@ -373,7 +373,7 @@ Botão de deletar produto agora aparece e todos os dados do produto são preench
 
 ## Testes
 
-### Eu ainda não sei escrever bons testes, escrevi alguns em jest mas nao fiquei satisfeito com a qualidade dos mesmos, então pra não entregar algo que seja sem excelência eu optei por não continuar fazendo.
+### Eu ainda preciso melhorar nas escritas de testes, escrevi alguns em jest mas nao fiquei satisfeito com a qualidade dos mesmos, então para não entregar algo que seja sem excelência eu optei por não continuar fazendo.
 
 <!-- See the [open issues](https://github.com/samuelcolares/moxen-live-shopping/issues) for a full list of proposed features (and known issues). -->
 
