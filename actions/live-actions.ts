@@ -9,6 +9,7 @@ export const onCreateLive = async (data: Live) => {
   try {
     await createLive(data);
     revalidatePath("/canal");
+    revalidatePath("/");
   } catch (error) {
     throw new Error("Interal Error");
   }
@@ -19,6 +20,7 @@ export const onUpdateLive = async (liveId: string, data: Live) => {
     await updateLive(liveId, data);
     revalidatePath("/canal");
     revalidatePath(`/live/${liveId}`);
+    revalidatePath("/");
   } catch (error) {
     throw new Error("Interal Error");
   }
@@ -29,6 +31,7 @@ export const onDeleteLive = async (liveId: string) => {
     await deleteLive(liveId);
     revalidatePath("/canal");
     revalidatePath(`/live/${liveId}`);
+    revalidatePath("/");
   } catch (error) {
     throw new Error("Interal Error");
   }
