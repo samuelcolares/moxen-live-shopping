@@ -300,7 +300,7 @@ Abaixo da imagem de perfil possui seletor de abas podendo ser alternadas entre L
 2.  Link para editar a produto
 3.  Link para deletar produto aonde irá abrir um Alert Modal para re-confirmar se o usuário deseja prosseguir em sua ação.
 
-#### 5.2.1 View Snippet
+#### 5.2.1 Modal galeria com imagens do produto
 
 ![New Snippet Screenshot][dialog-modal-2]
 ⚠️ Galeria com abas de seleção de imagem criadas com Headless ui
